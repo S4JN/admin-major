@@ -1,6 +1,7 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import './items.css'
 import Sidebar from '../Sidebar';
+import axios from 'axios';
 
 
 const Items = () => {  
@@ -52,6 +53,36 @@ const Items = () => {
           amt: 2100,
         },
       ];
+
+      const [items,setItems]= useState([]);
+
+      const getItems=async ()=>{
+        try {
+          const {data}= await axios.get("http://localhost:8000/api/admin/inventory/all")
+          console.log(data);
+          setItems(data.inventories)
+          console.log(data.inventories);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+
+      const handleDelete=async(_id)=>{
+        try {
+          const {data}= await axios.post("http://localhost:8000/api/admin/inventory/delete",_id)
+          console.log(data);
+          setItems(data.inventories)
+          console.log(data.inventories);
+        } catch (error) {
+          console.log(error);
+        }        
+
+      }
+
+      useEffect(()=>{
+        getItems();
+      },[])
      
   return (
     <>  
@@ -76,17 +107,16 @@ const Items = () => {
       
         <Sidebar />
         <div className='outer'>
-        {data.map((item, index) => (
+        {items.map((item, index) => (
             <div key={index} className='item-card'>
                 <div className='details'>
                     <p>Name: {item.name}</p>
-                    <p> UV: {item.uv || 'N/A'}</p>
-                    <p> PV: {item.pv}</p>
-                    <p> AMT: {item.amt}</p>
+                    <p> _id: {item._id}</p>
+                    
                 </div>
                 <div className='del-btn'>
                   <button onClick={()=>{setVisibility(true)}}>View</button>
-                  <button>Delete</button>
+                  <button onClick={()=>handleDelete(item._id)}>Delete</button>
                 </div>
             </div>
       ))}

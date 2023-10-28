@@ -1,9 +1,10 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill} from 'react-icons/bs'
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header'
 import Sidebar from './Sidebar'
+import axios from 'axios';
 
 function Home() {
   const navigate = useNavigate();
@@ -11,6 +12,12 @@ function Home() {
       navigate(route);
     }
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
+  const [invCount, setInvCount]= useState("0");
+  const [serviceCount, setServiceCount]= useState("0");
+  const [userCount, setUserCount]= useState("0");
+  
+
+
 
   const OpenSidebar = () => {
     setOpenSidebarToggle(!openSidebarToggle)
@@ -60,6 +67,43 @@ function Home() {
         },
       ];
      
+      const getInv=async ()=>{
+        try {
+          const {data}= await axios.get("http://localhost:8000/api/admin/inventory/count")
+          console.log(data);
+          setInvCount(data.count);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      const getService=async ()=>{
+        try {
+          const {data}= await axios.get("http://localhost:8000/api/admin/service/count")
+          console.log(data);
+          setServiceCount(data.count);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      const getUsers=async ()=>{
+        try {
+          const {data}= await axios.get("http://localhost:8000/api/admin/users/count")
+          console.log(data);
+          setUserCount(data.count);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      useEffect(()=>{
+        getInv();
+        getService();
+        getUsers();
+      },[])
+
+
 
   return (
     <>
@@ -76,7 +120,7 @@ function Home() {
                     <h3>Items</h3>
                     <BsFillArchiveFill className='card_icon'/>
                 </div>
-                <h1>300</h1>
+                <h1>{invCount}</h1>
             </div>
             <div className='card' >
                 <div className='card-inner'>
@@ -90,14 +134,14 @@ function Home() {
                     <h3>Users</h3>
                     <BsPeopleFill className='card_icon'/>
                 </div>
-                <h1>33</h1>
+                <h1>{userCount}</h1>
             </div>
             <div className='card'  onClick={()=>{handleClick("/services");}}>
                 <div className='card-inner'>
                     <h3>Services</h3>
                     <BsPeopleFill className='card_icon'/>
                 </div>
-                <h1>30</h1>
+                <h1>{serviceCount}</h1>
             </div>
         </div>
 
