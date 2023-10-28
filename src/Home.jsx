@@ -80,7 +80,7 @@ function Home() {
             </div>
             <div className='card' >
                 <div className='card-inner'>
-                    <h3>CATEGORIES</h3>
+                    <h3>Mails Sent</h3>
                     <BsFillGrid3X3GapFill className='card_icon'/>
                 </div>
                 <h1>12</h1>
