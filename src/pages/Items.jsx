@@ -88,7 +88,7 @@ const Items = () => {
 
   return (
     <>
-      <div>
+      {/* <div>
         {visibility && (
           <div className='overlay'>
             <div className='second-detail' style={{ backgroundColor: "white", height: "400px", width: "400px" }}>
@@ -105,7 +105,7 @@ const Items = () => {
           </div>
         )}
 
-      </div>
+      </div> */}
 
       <Sidebar />
       <div className='outer'>
@@ -117,7 +117,7 @@ const Items = () => {
 
             </div>
             <div className='del-btn'>
-              <button onClick={() => { setVisibility(true) }}>View</button>
+              {/* <button onClick={() => { setVisibility(true) }}>View</button> */}
               <button onClick={() => handleDelete(item._id)}>Delete</button>
             </div>
           </div>

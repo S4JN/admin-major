@@ -38,11 +38,11 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
                     <BsListCheck className='icon'/> Services
                 </a>
             </li>
-            <li className='sidebar-list-item' onClick={()=>{handleClick("/reports")}}>
+            {/* <li className='sidebar-list-item' onClick={()=>{handleClick("/reports")}}>
                 <a href="">
                     <BsMenuButtonWideFill className='icon'/> Reports
                 </a>
-            </li>
+            </li> */}
         </ul>
     </aside>
   )

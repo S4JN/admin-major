@@ -1,5 +1,6 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import Sidebar from '../Sidebar';
+import axios from 'axios';
 
 
 const Users = () => {
@@ -51,10 +52,28 @@ const Users = () => {
           amt: 2100,
         },
       ];
-     
+
+      const [items, setItems] = useState([]);
+
+      const getItems = async () => {
+        try {
+          const { data } = await axios.get("http://localhost:8000/api/admin/users/all")
+          console.log(data);
+          setItems(data.users)
+    
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      
+    
+      useEffect(() => {
+        getItems();
+      }, [])
+    
   return (
     <>  
-    <div>
+    {/* <div>
     {visibility && (
       <div className='overlay'>
         <div className='second-detail' style={{ backgroundColor: "white", height: "400px", width: "400px" }}>
@@ -71,21 +90,15 @@ const Users = () => {
         </div>
       )}
     
-    </div>
-      
+    </div> */}
+
         <Sidebar />
         <div className='outer'>
-        {data.map((item, index) => (
+        {items.map((item, index) => (
             <div key={index} className='item-card'>
                 <div className='details'>
                     <p>Name: {item.name}</p>
-                    <p> UV: {item.uv || 'N/A'}</p>
-                    <p> PV: {item.pv}</p>
-                    <p> AMT: {item.amt}</p>
-                </div>
-                <div className='del-btn'>
-                  <button onClick={()=>{setVisibility(true)}}>View</button>
-                  <button>Delete</button>
+                    <p>Id: {item._id }</p>
                 </div>
             </div>
       ))}
