@@ -130,9 +130,9 @@ body {
 
 .main-cards {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
-  margin: 15px 0;
+  margin: 20px 30px;
 }
 
 .card {

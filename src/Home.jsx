@@ -114,8 +114,6 @@ function Home() {
           <h3>DASHBOARD</h3>
         </div>
 
-        <div style={{ display: "flex" }}>
-
           <div className='main-cards'>
             <div className='card' onClick={() => { handleClick("/items"); }}>
               <div className='card-inner'>
@@ -147,7 +145,6 @@ function Home() {
             </div>
           </div>
           
-        </div>
 
 
       </main>
