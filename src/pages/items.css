@@ -1,0 +1,38 @@
+.outer{
+    width: 82vw;
+}
+.item-card{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  border: 1px solid #555;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  color: #fff;
+}
+.details{
+    /* display: flex;     */
+}
+.details p {
+    margin-right: 20px; /* Add margin to the right of each detail item */
+  }
+  
+  /* To prevent margin on the last detail item */
+  .details p:last-child {
+    margin-right: 0;
+  }
+.del-btn button {
+    background-color: #ff0000; 
+    color: #fff;
+    padding: 5px 10px; 
+    cursor: pointer; 
+    border: none; /* Remove button border */
+    /* border-radius: 10px; */
+    margin-right: 10px; 
+  }
+  
+  .del-btn button:last-child {
+    margin-right: 0; /* Remove margin from the last button */
+  }
