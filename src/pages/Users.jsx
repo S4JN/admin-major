@@ -1,8 +1,12 @@
-import React from 'react'
+import {useState} from 'react'
 import Sidebar from '../Sidebar';
 
 
 const Users = () => {
+  const [visibility,setVisibility]=useState(false);
+  const handleSubmit=()=>{
+    window.location.href = 'http://localhost:5173/';
+  }
     const data = [
         {
           name: 'Page A',
@@ -47,9 +51,29 @@ const Users = () => {
           amt: 2100,
         },
       ];
+     
   return (
-    <>
-        <Sidebar/>
+    <>  
+    <div>
+    {visibility && (
+      <div className='overlay'>
+        <div className='second-detail' style={{ backgroundColor: "white", height: "400px", width: "400px" }}>
+
+          <div className='second-content'>
+            <h2>Message of Report:</h2>
+            <h4>report message daalna hai</h4>
+          </div>
+          <div className='showdet-btn'>
+            <button onClick={()=>{handleSubmit();}}>View on Site</button>
+            <button onClick={() =>{setVisibility(false)}}>Close</button>
+          </div>
+        </div>
+        </div>
+      )}
+    
+    </div>
+      
+        <Sidebar />
         <div className='outer'>
         {data.map((item, index) => (
             <div key={index} className='item-card'>
@@ -60,13 +84,15 @@ const Users = () => {
                     <p> AMT: {item.amt}</p>
                 </div>
                 <div className='del-btn'>
-                  <button>View</button>
+                  <button onClick={()=>{setVisibility(true)}}>View</button>
                   <button>Delete</button>
                 </div>
             </div>
       ))}
         </div>
+        
     </>
+
   )
 }
 
